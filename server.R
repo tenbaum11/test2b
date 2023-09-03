@@ -4,9 +4,10 @@ server <- function(input, output) {
   startTime <- as.numeric(Sys.time())
   
   token <- anonymous_login(project_api = "AIzaSyDt2yl4_YFhPmaLnlowccxGJKARPfMhFjE")
+  # purl = "https://esp32-firebase-demo-b9d6b-default-rtdb.firebaseio.com/"
+  #purl = "https://esp32-firebase-demo-b9d6b-default-rtdb.firebaseio.com/TestEC3/fakeData/"
   purl = "https://esp32-firebase-demo-b9d6b-default-rtdb.firebaseio.com/"
-  #fname = "test3"
-  
+ 
   
   sensorInput <- reactive({
     fname = input$firebase_test
@@ -49,6 +50,23 @@ server <- function(input, output) {
     
     return(x.df2)
   })
+  
+  output$airtemp <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = x$temperature$value[1]
+    valueBox(
+      value = formatC(fb.value, digits = 2, format = "f"),
+      subtitle = "Air Temp (F)",
+      icon = icon("temperature-half"),
+      color = "yellow"
+      # width = 22
+      #color = if (downloadRate >= input$rateThreshold) "yellow" else "aqua"
+    )
+  })  
+  
+  
+  
   
   
   output$distPlot <- renderPlot({
