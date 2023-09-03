@@ -20,10 +20,6 @@ dashboardPage(
     tabItems(
       tabItem("dashboard",
               fluidRow(column(12,
-                valueBoxOutput(width=4, "count"),              
-                valueBoxOutput(width=4, "rate"))
-              ),
-              fluidRow(column(12,
                               valueBoxOutput(width=3, "airtemp"),              
                               valueBoxOutput(width=3, "humidity"),
                               valueBoxOutput(width=3, "pressure"),
