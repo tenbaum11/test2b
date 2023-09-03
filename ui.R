@@ -1,4 +1,5 @@
 # ui.R
+library(plotly)
 dashboardPage(
   dashboardHeader(title = "cran.rstudio.com"),
   dashboardSidebar(
@@ -34,16 +35,16 @@ dashboardPage(
                               valueBoxOutput(width=3, "voltage")
               )
               ),
+              # fluidRow(
+              #   column(3, plotlyOutput("tempPlot")),
+              #   column(3, plotlyOutput("humidityPlot")),
+              #   column(3, plotlyOutput("pressurePlot")),
+              #   column(3, plotlyOutput("gasPlot"))
+              # ),
               fluidRow(
-                column(3, plotlyOutput("tempPlot")),
-                column(3, plotlyOutput("humidityPlot")),
-                column(3, plotlyOutput("pressurePlot")),
-                column(3, plotlyOutput("gasPlot"))
-              ),
-              fluidRow(
-                column(3, plotlyOutput("watertempPlot")),
-                column(3, plotlyOutput("waterphPlot")),
-                column(3, plotlyOutput("turbidityPlot")),
+                # column(3, plotlyOutput("watertempPlot")),
+                # column(3, plotlyOutput("waterphPlot")),
+                # column(3, plotlyOutput("turbidityPlot")),
                 column(3, plotlyOutput("voltagePlot"))
               )
       ),
