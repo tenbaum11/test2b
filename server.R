@@ -99,6 +99,58 @@ server <- function(input, output) {
     )
   }) 
   
+  # water
+  
+  output$watertemp <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = 99.9
+    valueBox(
+      value = formatC(fb.value, digits = 1, format = "f"),
+      subtitle = "H20 Temp (F)",
+      icon = icon("fire-flame-simple"),
+      color = "blue"
+    )
+  }) 
+  
+  output$waterph <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = 7.4
+    valueBox(
+      value = formatC(fb.value, digits = 1, format = "f"),
+      subtitle = "pH",
+      icon = icon("chart-simple"),
+      color = "blue"
+    )
+  }) 
+  
+  output$turbidity <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = 99.9
+    valueBox(
+      value = formatC(fb.value, digits = 1, format = "f"),
+      subtitle = "Turbidity",
+      icon = icon("vial"),
+      color = "blue"
+    )
+  }) 
+  
+  output$voltage <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = x$voltage$value[1]
+    # fb.value = 99.9
+    valueBox(
+      value = formatC(fb.value, digits = 3, format = "f"),
+      subtitle = "Voltage (V)",
+      icon = icon("bolt"),
+      color = "blue"
+    )
+  }) 
+  
+  
   
   
   output$distPlot <- renderPlot({
