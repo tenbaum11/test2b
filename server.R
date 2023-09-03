@@ -60,12 +60,44 @@ server <- function(input, output) {
       subtitle = "Air Temp (F)",
       icon = icon("temperature-half"),
       color = "yellow"
-      # width = 22
-      #color = if (downloadRate >= input$rateThreshold) "yellow" else "aqua"
     )
   })  
   
+  output$humidity <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = x$humidity$value[1]
+    valueBox(
+      value = formatC(fb.value, digits = 1, format = "f"),
+      subtitle = "Humidity (%)",
+      icon = icon("percent"),
+      color = "yellow"
+    )
+  })  
   
+  output$pressure <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = x$pressure$value[1]
+    valueBox(
+      value = formatC(fb.value, digits = 1, format = "f"),
+      subtitle = "Pressure (bar)",
+      icon = icon("temperature-half"),
+      color = "yellow"
+    )
+  }) 
+  
+  output$gas <- renderValueBox({
+    db = sensorInput()
+    x = db %>%filter(ID == max(ID))
+    fb.value = x$gas$value[1]
+    valueBox(
+      value = formatC(fb.value, digits = 1, format = "f"),
+      subtitle = "Gas (%)",
+      icon = icon("fire-flame-simple"),
+      color = "yellow"
+    )
+  }) 
   
   
   
