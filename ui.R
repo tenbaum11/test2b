@@ -19,8 +19,32 @@ dashboardPage(
               fluidRow(column(12,
                 valueBoxOutput(width=4, "count"),              
                 valueBoxOutput(width=4, "rate"))
-                # valueBoxOutput("count"),
-                # column(4,valueBoxOutput("users"))
+              ),
+              fluidRow(column(12,
+                              valueBoxOutput(width=3, "airtemp"),              
+                              valueBoxOutput(width=3, "humidity"),
+                              valueBoxOutput(width=3, "pressure"),
+                              valueBoxOutput(width=3, "gas")
+              )
+              ),
+              fluidRow(column(12,
+                              valueBoxOutput(width=3, "watertemp"),              
+                              valueBoxOutput(width=3, "waterph"),
+                              valueBoxOutput(width=3, "turbidity"),
+                              valueBoxOutput(width=3, "voltage")
+              )
+              ),
+              fluidRow(
+                column(3, plotlyOutput("tempPlot")),
+                column(3, plotlyOutput("humidityPlot")),
+                column(3, plotlyOutput("pressurePlot")),
+                column(3, plotlyOutput("gasPlot"))
+              ),
+              fluidRow(
+                column(3, plotlyOutput("watertempPlot")),
+                column(3, plotlyOutput("waterphPlot")),
+                column(3, plotlyOutput("turbidityPlot")),
+                column(3, plotlyOutput("voltagePlot"))
               )
       ),
       tabItem("rawdata",
@@ -34,31 +58,3 @@ dashboardPage(
 
 
 # 
-# ui <- fluidPage(
-#   titlePanel("Hello Shiny!"),
-#   fluidRow(
-#     valueBoxOutput("rate"),
-#     valueBoxOutput("count"),
-#     valueBoxOutput("users")
-#   ),
-#   column(6,
-#   fluidRow(column(12,
-#   mainPanel(
-#     sliderInput("obs",
-#                 "Number of observations",
-#                 min = 1,
-#                 max = 5000,
-#                 value = 100))),
-#     plotOutput("distPlot")
-#   )),
-#   column(6,
-#   fluidRow(column(6,
-#         sliderInput("obs2",
-#                     "Number of observations",
-#                     min = 1,
-#                     max = 5000,
-#                     value = 300))),
-#   fluidRow(column(12,
-#         plotOutput("distPlot2"))
-#   ))
-# )
