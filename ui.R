@@ -1,7 +1,9 @@
 # ui.R
 library(plotly)
 dashboardPage(
-  dashboardHeader(title = "cran.rstudio.com"),
+  dashboardHeader(
+    title = "cran.rstudio.com"
+    ),
   dashboardSidebar(
     textInput("firebase_node", "Firebase Node", "test3"),
     textInput("firebase_key", "Firebase Key", "int"),
@@ -17,6 +19,9 @@ dashboardPage(
     )
   ),
   dashboardBody(
+    shinyjs::useShinyjs(),
+    actionButton("toggle_btn", " Toggle sidebar "),
+    HTML("<br><br>"),
     tabItems(
       tabItem("dashboard",
               fluidRow(column(12,

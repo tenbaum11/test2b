@@ -9,6 +9,14 @@ server <- function(input, output) {
   purl = "https://esp32-firebase-demo-b9d6b-default-rtdb.firebaseio.com/"
  
   
+  # observeEvent(input$toggleSidebar, {
+  #   shinyjs::toggle(id = "Sidebar")
+  # })
+  
+  observeEvent(input$toggle_btn, {
+    shinyjs::toggleClass(selector = "body", class = "sidebar-collapse")
+  })
+  
   sensorInput <- reactive({
     fname = input$firebase_test
     nodename = input$node
