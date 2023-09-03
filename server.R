@@ -7,6 +7,50 @@ server <- function(input, output) {
   purl = "https://esp32-firebase-demo-b9d6b-default-rtdb.firebaseio.com/"
   #fname = "test3"
   
+  
+  sensorInput <- reactive({
+    fname = input$firebase_test
+    nodename = input$node
+    # fname = 'allDataSensor01'
+    #urlPath = paste0(purl,"/",fname,".json")
+    # urlPath = paste0(purl, nodename, "/", "fakeData", fname)
+    urlPath = paste0(purl, nodename, "/", "fakeData/")
+    x.df = download(projectURL = urlPath, fileName = fname)
+    # x.df2 = as.data.frame(x.df) %>% drop_na() %>%
+    #   rename_all(list( ~gsub("fakeData.fakeSensor03", "sensor_03", .) )) %>%
+    #   mutate(
+    #     datetime = as_datetime(sensor_03.time$ts/1000),   
+    #     date = as.Date(datetime),
+    #     time = time(datetime),
+    #     hour = hour(datetime),
+    #     minute = minute(datetime),
+    #     second = second(datetime)
+    #   )
+    # x.df = download(projectURL = purl, fileName = "allDataSensor01")
+    x.df2 = x.df %>%
+      mutate(
+        ID = as.integer(rownames(.))-1,
+        datetime = as.integer(rownames(.)),
+        #datetime = Sys.Date() + as.integer(rownames(.)),
+        # datetime = as_datetime(time$ts/1000),  
+        # date = as.Date(datetime),
+        # time1 = time(datetime),
+        # hour = hour(datetime),
+        # minute = minute(datetime),
+        # second = second(datetime),
+        obs = 1
+      ) %>% 
+      select(
+        ID,
+        datetime,
+        everything(),
+        -time
+      )
+    
+    return(x.df2)
+  })
+  
+  
   output$distPlot <- renderPlot({
     dist <- rnorm(input$obs)
     hist(dist,
