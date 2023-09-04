@@ -30,22 +30,20 @@ dashboardPage(
                               valueBoxOutput(width=3, "airtemp"),              
                               valueBoxOutput(width=3, "humidity"),
                               valueBoxOutput(width=3, "pressure"),
-                              valueBoxOutput(width=3, "gas")
-              )
+                              valueBoxOutput(width=3, "gas"))
+              ),
+              fluidRow(
+                column(3, plotlyOutput("tempPlot")),
+                column(3, plotlyOutput("humidityPlot")),
+                column(3, plotlyOutput("pressurePlot")),
+                column(3, plotlyOutput("gasPlot"))
               ),
               fluidRow(column(12,
                               valueBoxOutput(width=3, "watertemp"),              
                               valueBoxOutput(width=3, "waterph"),
                               valueBoxOutput(width=3, "turbidity"),
-                              valueBoxOutput(width=3, "voltage")
-              )
+                              valueBoxOutput(width=3, "voltage"))
               ),
-              # fluidRow(
-              #   column(3, plotlyOutput("tempPlot")),
-              #   column(3, plotlyOutput("humidityPlot")),
-              #   column(3, plotlyOutput("pressurePlot")),
-              #   column(3, plotlyOutput("gasPlot"))
-              # ),
               fluidRow(
                 column(3, plotlyOutput("watertempPlot")),
                 column(3, plotlyOutput("waterphPlot")),

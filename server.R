@@ -108,7 +108,99 @@ server <- function(input, output) {
     )
   }) 
   
-  # water
+  
+  
+  ### AIR PLOT  ==============================  AIR PLOTS
+  # column(3, plotlyOutput("tempPlot")),
+  # column(3, plotlyOutput("humidityPlot")),
+  # column(3, plotlyOutput("pressurePlot")),
+  # column(3, plotlyOutput("gasPlot"))
+  
+  ### AIR  TEMP
+  output$tempPlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$temperature$value, 
+                line = list(shape = "spline", color = '#F39C12'),
+                name = 'Air Temp [F]') %>%
+      layout(
+        title = list(text = "Air Temp [F]"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'Air Temp [F]', rangemode = "normal", tickformat = ".0f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })   
+  
+  ### HUMIDITY
+  output$humidityPlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$humidity$value, 
+                line = list(shape = "spline", color = '#F39C12'),
+                name = 'Humidity [%]') %>%
+      layout(
+        title = list(text = "Humidity [%]"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'Humidity [%]', rangemode = "normal", tickformat = ".0f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })     
+  
+  ### PRESSURE
+  output$pressurePlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$pressure$value, 
+                line = list(shape = "spline", color = '#F39C12'),
+                name = 'Pressure') %>%
+      layout(
+        title = list(text = "Pressure [mbar]"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'Pressure [mbar]', rangemode = "normal", tickformat = ".0f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })   
+  
+  
+  ### GAS
+  output$gasPlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$gas$value, 
+                line = list(shape = "spline", color = '#F39C12'),
+                name = 'Gas') %>%
+      layout(
+        title = list(text = "Gas"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'Gas', rangemode = "normal", tickformat = ".0f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })   
+  
+  
+  ### =================================================
+  ### WATER DATA  ==============================  WATER 
+  ### =================================================
   
   output$watertemp <- renderValueBox({
     db = sensorInput()
@@ -126,7 +218,7 @@ server <- function(input, output) {
   output$waterph <- renderValueBox({
     db = sensorInput()
     x = db %>% filter(ID == max(ID))
-    fb.value = 7.4
+    fb.value = 99.9
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
       subtitle = "pH",
@@ -170,7 +262,7 @@ server <- function(input, output) {
     df = sensorInput()
     plot_ly(type = 'scatter', mode = 'lines') %>%
       add_trace(x = ~df$datetime, y = ~df$extra1$value, 
-                line = list(shape = "spline", color = 'blue'),
+                line = list(shape = "spline", color = '#0073B7'),
                 name = 'H2O Temp [Extra 1]') %>%
       layout(
         title = list(text = "H20 Temp [Extra 1]"),
@@ -190,7 +282,7 @@ server <- function(input, output) {
     df = sensorInput()
     plot_ly(type = 'scatter', mode = 'lines') %>%
       add_trace(x = ~df$datetime, y = ~df$extra1$value, 
-                line = list(shape = "spline", color = 'blue'),
+                line = list(shape = "spline", color = '#0073B7'),
                 name = 'pH') %>%
       layout(
         title = list(text = "pH [FAKE]"),
@@ -210,7 +302,7 @@ server <- function(input, output) {
     df = sensorInput()
     plot_ly(type = 'scatter', mode = 'lines') %>%
       add_trace(x = ~df$datetime, y = ~df$extra2$value, 
-                line = list(shape = "spline", color = 'blue'),
+                line = list(shape = "spline", color = '#0073B7'),
                 name = 'pH') %>%
       layout(
         title = list(text = "Turbidity [Extra 2]"),
