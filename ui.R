@@ -49,7 +49,7 @@ dashboardPage(
                 # column(3, plotlyOutput("watertempPlot")),
                 # column(3, plotlyOutput("waterphPlot")),
                 # column(3, plotlyOutput("turbidityPlot")),
-                column(3, plotlyOutput("voltagePlot"))
+                column(12, plotlyOutput("voltagePlot"))
               )
       ),
       tabItem("rawdata",

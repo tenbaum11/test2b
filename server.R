@@ -160,18 +160,15 @@ server <- function(input, output) {
     )
   }) 
   
+
   
   output$voltagePlot<-renderPlotly({
     df = sensorInput()
-    plot_ly(
-      x = ~df$datetime,
-      y = ~df$voltage$value,
-      line = list(shape = "spline", color = 'blue'),
-      marker = list(
-        color = "red",
-        size = 0.9
-      )
-    ) |> 
+  
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$voltage$value, 
+                line = list(shape = "spline", color = 'red'),
+                name = 'Voltage') %>%
       layout(
         title = list(text = "Voltage"),
         xaxis = list(rangemode = "normal",
@@ -185,9 +182,9 @@ server <- function(input, output) {
                      zerolinecolor = '#ffff',
                      zerolinewidth = 2,
                      gridcolor = 'ffff'
-        ),
-        plot_bgcolor='#e5ecf6', width = 900
+        )
       )
+    
     
   })    
   
