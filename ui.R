@@ -1,6 +1,7 @@
 # ui.R
 library(plotly)
 library(shinyjs)
+library(lubridate)
 dashboardPage(
   dashboardHeader(
     title = "cran.rstudio.com"

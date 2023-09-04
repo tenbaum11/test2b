@@ -62,7 +62,7 @@ server <- function(input, output) {
   
   output$airtemp <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     fb.value = x$temperature$value[1]
     valueBox(
       value = formatC(fb.value, digits = 2, format = "f"),
@@ -74,7 +74,7 @@ server <- function(input, output) {
   
   output$humidity <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     fb.value = x$humidity$value[1]
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
@@ -86,7 +86,7 @@ server <- function(input, output) {
   
   output$pressure <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     fb.value = x$pressure$value[1]
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
@@ -98,7 +98,7 @@ server <- function(input, output) {
   
   output$gas <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     fb.value = x$gas$value[1]
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
@@ -112,7 +112,7 @@ server <- function(input, output) {
   
   output$watertemp <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     # fb.value = 99.9
     fb.value = x$extra1$value[1]
     valueBox(
@@ -125,7 +125,7 @@ server <- function(input, output) {
   
   output$waterph <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     fb.value = 7.4
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
@@ -137,7 +137,7 @@ server <- function(input, output) {
   
   output$turbidity <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     # fb.value = 99.9
     fb.value = x$extra2$value[1]
     valueBox(
@@ -150,7 +150,7 @@ server <- function(input, output) {
   
   output$voltage <- renderValueBox({
     db = sensorInput()
-    x = db %>%filter(ID == max(ID))
+    x = db %>% filter(ID == max(ID))
     fb.value = x$voltage$value[1]
     # fb.value = 99.9
     valueBox(
@@ -162,7 +162,7 @@ server <- function(input, output) {
   }) 
   
 
-  output$voltagePlot<-renderPlotly({
+  output$voltagePlot <- renderPlotly({
     df = sensorInput()
   
     plot_ly(type = 'scatter', mode = 'lines') %>%
