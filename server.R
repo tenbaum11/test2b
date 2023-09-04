@@ -161,33 +161,89 @@ server <- function(input, output) {
     )
   }) 
   
+  
+  ### PLOTS ==============================  PLOTS
+  
 
+  ### H20 TEMP
+  output$watertempPlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$extra1$value, 
+                line = list(shape = "spline", color = 'blue'),
+                name = 'H2O Temp [Extra 1]') %>%
+      layout(
+        title = list(text = "H20 Temp [Extra 1]"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'Temp [Extra 1]', rangemode = "normal", tickformat = ".0f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })   
+  
+  ### pH
+  output$waterphPlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$extra1$value, 
+                line = list(shape = "spline", color = 'blue'),
+                name = 'pH') %>%
+      layout(
+        title = list(text = "pH [FAKE]"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'pH', rangemode = "normal", tickformat = ".0f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })   
+  
+  ### TURBIDITY
+  output$turbidityPlot <- renderPlotly({
+    df = sensorInput()
+    plot_ly(type = 'scatter', mode = 'lines') %>%
+      add_trace(x = ~df$datetime, y = ~df$extra2$value, 
+                line = list(shape = "spline", color = 'blue'),
+                name = 'pH') %>%
+      layout(
+        title = list(text = "Turbidity [Extra 2]"),
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
+        ),
+        yaxis = list(title = 'Turbidity [Extra 2]', rangemode = "normal", tickformat = ".1f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
+      )
+  })   
+  
+  
+  ### VOLTAGE
   output$voltagePlot <- renderPlotly({
     df = sensorInput()
-  
     plot_ly(type = 'scatter', mode = 'lines') %>%
       add_trace(x = ~df$datetime, y = ~df$voltage$value, 
                 line = list(shape = "spline", color = 'red'),
                 name = 'Voltage') %>%
       layout(
         title = list(text = "Voltage"),
-        xaxis = list(rangemode = "normal",
-                     title = 'Datetime',
-                     zerolinecolor = 'black',
-                     zerolinewidth = 6,
-                     gridcolor = 'white'
+        xaxis = list(title = 'Datetime', rangemode = "normal",
+                     zerolinecolor = 'black', zerolinewidth = 6,gridcolor = 'white'
         ),
-        yaxis = list(rangemode = "normal",
-                     title = 'Voltage [V]',
-                     zerolinecolor = '#ffff',
-                     zerolinewidth = 2,
-                     gridcolor = 'ffff',
-                     tickformat = ".2f"
+        yaxis = list(title = 'Voltage [V]', rangemode = "normal", tickformat = ".2f",
+                     zerolinecolor = '#ffff', zerolinewidth = 2, gridcolor = 'ffff'
         ),
         plot_bgcolor='#e5ecf6',
         showlegend = F
       )
-    
   })    
   
   
