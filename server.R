@@ -182,7 +182,8 @@ server <- function(input, output) {
                      zerolinecolor = '#ffff',
                      zerolinewidth = 2,
                      gridcolor = 'ffff'
-        )
+        ),
+        plot_bgcolor='#e5ecf6'
       )
     
     
