@@ -112,10 +112,11 @@ server <- function(input, output) {
   output$watertemp <- renderValueBox({
     db = sensorInput()
     x = db %>%filter(ID == max(ID))
-    fb.value = 99.9
+    # fb.value = 99.9
+    fb.value = x$extra1$value[1]
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
-      subtitle = "H20 Temp (F)",
+      subtitle = "Extra 1",
       icon = icon("fire-flame-simple"),
       color = "blue"
     )
@@ -136,10 +137,11 @@ server <- function(input, output) {
   output$turbidity <- renderValueBox({
     db = sensorInput()
     x = db %>%filter(ID == max(ID))
-    fb.value = 99.9
+    # fb.value = 99.9
+    fb.value = x$extra2$value[1]
     valueBox(
       value = formatC(fb.value, digits = 1, format = "f"),
-      subtitle = "Turbidity",
+      subtitle = "Extra 2",
       icon = icon("vial"),
       color = "blue"
     )
@@ -157,6 +159,47 @@ server <- function(input, output) {
       color = "blue"
     )
   }) 
+  
+  
+  output$voltagePlot<-renderPlotly({
+    df = sensorInput()
+    plot_ly(
+      x = ~df$datetime,
+      y = ~df$voltage$value,
+      line = list(shape = "spline", color = 'blue'),
+      marker = list(
+        color = "red",
+        size = 0.9
+      )
+    ) |> 
+      layout(
+        title = list(text = "Voltage"),
+        xaxis = list(rangemode = "normal",
+                     title = 'Datetime',
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
+                     gridcolor = 'ffff'
+        ),
+        yaxis = list(rangemode = "normal",
+                     title = 'Voltage [V]',
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
+                     gridcolor = 'ffff'
+        ),
+        plot_bgcolor='#e5ecf6', width = 900
+      )
+    
+  })    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
