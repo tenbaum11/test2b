@@ -39,19 +39,20 @@ server <- function(input, output) {
     x.df2 = x.df %>%
       mutate(
         ID = as.integer(rownames(.))-1,
-        datetime = as.integer(rownames(.)),
+        # datetime = as.integer(rownames(.)),
         #datetime = Sys.Date() + as.integer(rownames(.)),
-        # datetime = as_datetime(time$ts/1000),  
-        # date = as.Date(datetime),
-        # time1 = time(datetime),
-        # hour = hour(datetime),
-        # minute = minute(datetime),
-        # second = second(datetime),
+        datetime = as_datetime(time$ts/1000),
+        date = as.Date(datetime),
+        time1 = time(datetime),
+        hour = hour(datetime),
+        minute = minute(datetime),
+        second = second(datetime),
         obs = 1
       ) %>% 
       select(
         ID,
         datetime,
+        date, time1, hour, minute, second,
         everything(),
         -time
       )
@@ -161,7 +162,6 @@ server <- function(input, output) {
   }) 
   
 
-  
   output$voltagePlot<-renderPlotly({
     df = sensorInput()
   
@@ -173,19 +173,20 @@ server <- function(input, output) {
         title = list(text = "Voltage"),
         xaxis = list(rangemode = "normal",
                      title = 'Datetime',
-                     zerolinecolor = '#ffff',
-                     zerolinewidth = 2,
-                     gridcolor = 'ffff'
+                     zerolinecolor = 'black',
+                     zerolinewidth = 6,
+                     gridcolor = 'white'
         ),
         yaxis = list(rangemode = "normal",
                      title = 'Voltage [V]',
                      zerolinecolor = '#ffff',
                      zerolinewidth = 2,
-                     gridcolor = 'ffff'
+                     gridcolor = 'ffff',
+                     tickformat = ".2f"
         ),
-        plot_bgcolor='#e5ecf6'
+        plot_bgcolor='#e5ecf6',
+        showlegend = F
       )
-    
     
   })    
   
